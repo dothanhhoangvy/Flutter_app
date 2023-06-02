@@ -8,6 +8,8 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import 'controller_color.dart';
+
 enum MqttCurrentConnectionState2 {
   IDLE2,
   CONNECTING2,
@@ -33,6 +35,7 @@ class _GaugeTempState extends State<GaugeTemp> {
   late double EngTempVal = 0;
   late bool OverTmp = false;
   late double valengtmp = 0;
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +63,7 @@ class _GaugeTempState extends State<GaugeTemp> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: OverTmp ? Colors.red.withOpacity(0.1) : Colors.white10,
+        color: OverTmp ? Colors.red.withOpacity(0.1) : Colors.black,
         border: Border.all(
           color: OverTmp ? Colors.red : const Color(0xFF53F9FF),
           width: 2.w,
@@ -77,12 +80,12 @@ class _GaugeTempState extends State<GaugeTemp> {
               minimum: -40,
               maximum: 210,
               orientation: LinearGaugeOrientation.vertical,
-              majorTickStyle: const LinearTickStyle(
+              majorTickStyle: LinearTickStyle(
                   length: 10, thickness: 2.5, color: Colors.white),
-              minorTickStyle: const LinearTickStyle(
+              minorTickStyle: LinearTickStyle(
                   length: 5, thickness: 1.75, color: Colors.white),
               minorTicksPerInterval: 9,
-              axisLabelStyle: const TextStyle(
+              axisLabelStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -94,9 +97,9 @@ class _GaugeTempState extends State<GaugeTemp> {
                   position: LinearElementPosition.outside,
                   offset: 10,
                   child: Text("$valengtmp°C",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold)),
                 ),
                 LinearShapePointer(
@@ -133,7 +136,10 @@ class _GaugeTempState extends State<GaugeTemp> {
                   children: [
                     Text(
                       "engine".toUpperCase(),
-                      style: TextStyle(fontSize: 20.sp, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
                       "temp".toUpperCase(),
@@ -179,8 +185,7 @@ class _GaugeTempState extends State<GaugeTemp> {
       setState(() {
         EngTempVal = double.parse(message2);
 
-        double compare2 = 100;
-        if (EngTempVal >= compare2) {
+        if (EngTempVal > 80) {
           OverTmp = true;
 
           notify1();
@@ -240,7 +245,7 @@ void notify1() async {
         channelKey: "basic_channel",
         title: "Temperature over!!! ${Emojis.symbols_warning}",
         body: "Alert over Temperature",
-        bigPicture: 'asset://assets/alert.jpg',
+        bigPicture: 'asset://assets/engtemp.png',
         displayOnForeground: true,
         displayOnBackground: true,
         notificationLayout: NotificationLayout.BigPicture,

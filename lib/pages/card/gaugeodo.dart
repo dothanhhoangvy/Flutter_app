@@ -44,7 +44,7 @@ class _GaugeOdoState extends State<GaugeOdo> {
   void prepareMqttClient4() async {
     _setupMqttClient4();
     await _connectClient4();
-    _subscribeToTopic4('j1939/mileague');
+    _subscribeToTopic4('j1939/mileage');
   }
 
   void storedata() async {
@@ -61,7 +61,7 @@ class _GaugeOdoState extends State<GaugeOdo> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: odocon ? Colors.red.withOpacity(0.1) : Colors.white10,
+        color: odocon ? Colors.red.withOpacity(0.1) : Colors.black38,
         border: Border.all(
           color: odocon ? Colors.red : const Color(0xFF53F9FF),
           width: 2.w,
@@ -83,7 +83,7 @@ class _GaugeOdoState extends State<GaugeOdo> {
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: 30.sp),
+                        fontSize: 25.sp),
                   ),
                   Text(
                     "Distance".toUpperCase(),
@@ -95,6 +95,9 @@ class _GaugeOdoState extends State<GaugeOdo> {
                 ],
               ),
             ),
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(3, 55, 0, 0).r,
@@ -116,7 +119,7 @@ class _GaugeOdoState extends State<GaugeOdo> {
                       color: Colors.black,
                     ),
                   ),
-                  odometerNumber: OdometerNumber(MilVal.toInt()),
+                  odometerNumber: OdometerNumber(odoval.toInt()),
                   duration: const Duration(milliseconds: 1000),
                   letterWidth: 25.w,
                   numberTextStyle: TextStyle(
@@ -219,7 +222,7 @@ void notify4() async {
         channelKey: "basic_channel",
         title: "Maintenance!!! ${Emojis.symbols_warning}",
         body: "Time to maintenance",
-        bigPicture: 'asset://assets/alert.jpg',
+        bigPicture: 'asset://assets/maintenance.jpg',
         displayOnForeground: true,
         displayOnBackground: true,
         notificationLayout: NotificationLayout.BigPicture,

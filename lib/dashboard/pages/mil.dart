@@ -29,7 +29,7 @@ void initState() {
     });
   }
   Future<void> fetchData() async {
-    var response = await networkHandler.get("/home/data/Mileage");
+    var response = await networkHandler.get("data/");
     // setState(() {
       DataModel dataModel =DataModel?.fromJson(response);
       circular =false;

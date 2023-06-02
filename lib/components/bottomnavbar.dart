@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:testcapstone/pages/home.dart';
 import 'package:testcapstone/pages/location.dart';
 import 'package:testcapstone/pages/update.dart';
+import 'package:testcapstone/pages/dashboard.dart';
 
 import '../pages/card/controller.dart';
 
@@ -65,6 +66,7 @@ class _MainPageState extends State<MainPage> {
   final List tabss = [
     const HomePage(),
     const LocationPage(),
+    const DashboardPage(),
     const UpdatePage()
   ];
   @override
@@ -89,6 +91,7 @@ class _MainPageState extends State<MainPage> {
                 items: const <Widget>[
                   Icon(Icons.home_outlined, size: 30),
                   Icon(Icons.location_on_outlined, size: 30),
+                  Icon(Icons.speed_outlined, size: 30),
                   Icon(Icons.autorenew_outlined, size: 30),
                 ],
               ));

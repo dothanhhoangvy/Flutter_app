@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? val = pref.getString("login");
     print(val);
-    await Future.delayed(Duration(seconds: 4), () {
+    await Future.delayed(Duration(seconds: 2), () {
       if (val != null) {
         Navigator.pushAndRemoveUntil(
             context,

@@ -222,7 +222,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           child: Center(
                             child: circular
-                                ? const CircularProgressIndicator()
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
                                 : const Text(
                                     "Log In",
                                     style: TextStyle(

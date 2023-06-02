@@ -12,6 +12,7 @@ import 'package:testcapstone/pages/card/gaugespeed.dart';
 import 'package:testcapstone/pages/card/gaugetemp.dart';
 
 import 'card/controller.dart';
+import 'card/controller_color.dart';
 import 'card/tyres.dart';
 
 // import 'package:mqtt_client/mqtt_client.dart' as mqtt;
@@ -45,7 +46,6 @@ class _HomePageState extends State<HomePage>
 
   late ConnectivityResult result;
   late StreamSubscription subscription;
-
   var isConnected = false;
 
   checkInternet() async {
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage>
                           height: 24.h,
                           color: Colors.black,
                         ),
-                      )
+                      ),
                     ],
                     bottom: PreferredSize(
                         preferredSize: Size.fromHeight(10.h),
@@ -191,8 +191,7 @@ class _HomePageState extends State<HomePage>
                           height: constrains.maxHeight,
                           width: constrains.maxWidth,
                           child: Container(
-                            decoration:
-                                const BoxDecoration(color: Colors.black),
+                            decoration: BoxDecoration(color: Colors.black),
                           ),
                         ),
                         // Nothing really chnage, let's fix that
@@ -203,13 +202,13 @@ class _HomePageState extends State<HomePage>
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: constrains.maxHeight * 0.1),
-                            child: SvgPicture.asset(
-                              "assets/Car.svg",
-                              width: double.infinity,
-                            ),
+                            // child: SvgPicture.asset(
+                            //   "assets/Car.svg",
+                            //   width: double.infinity,
+                            // ),
                           ),
                         ),
-                        if (_controller.isShowTyre) ...tyres(constrains),
+                        //if (_controller.isShowTyre) ...tyres(constrains),
                         if (_controller.isShowTyreStatus)
                           Padding(
                             padding: const EdgeInsets.all(5.0),

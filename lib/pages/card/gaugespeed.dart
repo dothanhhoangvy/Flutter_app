@@ -60,7 +60,7 @@ class _GaugeSpeedState extends State<GaugeSpeed> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: OverSpd ? Colors.red.withOpacity(0.1) : Colors.white10,
+        color: OverSpd ? Colors.red.withOpacity(0.1) : Colors.black38,
         border: Border.all(
           color: OverSpd ? Colors.red : const Color(0xFF53F9FF),
           width: 2.w,
@@ -71,7 +71,7 @@ class _GaugeSpeedState extends State<GaugeSpeed> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             height: 187.h,
             width: 200.w,
             child: SfRadialGauge(
@@ -166,7 +166,7 @@ class _GaugeSpeedState extends State<GaugeSpeed> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 15, 0, 0).r,
-            child: Container(
+            child: SizedBox(
               width: 200.w,
               height: 79.h,
               child: Padding(
@@ -243,9 +243,7 @@ class _GaugeSpeedState extends State<GaugeSpeed> {
       SharedPreferences pref = await SharedPreferences.getInstance();
       setState(() {
         VhSpdVal = double.parse(message1);
-
-        double compare2 = 80;
-        if (VhSpdVal >= compare2) {
+        if (VhSpdVal > 80) {
           OverSpd = true;
           print(OverSpd);
           print(true);
@@ -305,7 +303,7 @@ void notify2() async {
         channelKey: "basic_channel",
         title: "Speed over!!! ${Emojis.symbols_warning}",
         body: "Alert Over Speed",
-        bigPicture: 'asset://assets/alert.jpg',
+        bigPicture: 'asset://assets/speed.png',
         displayOnForeground: true,
         displayOnBackground: true,
         notificationLayout: NotificationLayout.BigPicture,

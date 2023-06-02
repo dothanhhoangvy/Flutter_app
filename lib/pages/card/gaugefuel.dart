@@ -61,7 +61,7 @@ class _GaugeFuelState extends State<GaugeFuel> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: OverFl ? Colors.red.withOpacity(0.1) : Colors.white10,
+        color: OverFl ? Colors.red.withOpacity(0.1) : Colors.black12,
         border: Border.all(
           color: OverFl ? Colors.red : const Color(0xFF53F9FF),
           width: 2.w,
@@ -84,7 +84,7 @@ class _GaugeFuelState extends State<GaugeFuel> {
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
-                        fontSize: 30.sp),
+                        fontSize: 25.sp),
                   ),
                   Text(
                     "level".toUpperCase(),
@@ -302,17 +302,14 @@ class _GaugeFuelState extends State<GaugeFuel> {
       SharedPreferences pref = await SharedPreferences.getInstance();
       setState(() {
         FuelLvlVal = double.parse(message3);
-        double maxval = 3212.75;
-        double percent = (FuelLvlVal / maxval) * 100.0;
-        double compare3 = 20;
-        if (percent < compare3) {
+        if (FuelLvlVal < 20) {
           OverFl = true;
           notify3();
         } else {
           OverFl = false;
         }
         setState(() {
-          pref.setDouble("fuel", percent);
+          pref.setDouble("fuel", FuelLvlVal);
         });
       });
     });
@@ -343,7 +340,7 @@ void notify3() async {
         channelKey: "basic_channel",
         title: "Fuel Low!!! ${Emojis.symbols_warning}",
         body: "Alert Low Fuel",
-        bigPicture: 'asset://assets/alert.jpg',
+        bigPicture: 'asset://assets/fuellvl.jpg',
         displayOnForeground: true,
         displayOnBackground: true,
         notificationLayout: NotificationLayout.BigPicture,
