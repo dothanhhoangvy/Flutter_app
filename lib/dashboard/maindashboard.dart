@@ -25,7 +25,7 @@ class _MainDashboardState extends State<MainDashboard> {
         crossAxisCount: 1,
         children: <Widget>[
           CategoryCard(
-            title: "Engine Speed",
+            title: "Vehicle Speed",
             svgSrc: "assets/speedometer-remove-background.gif",
             press: () {
               Navigator.push(
@@ -48,18 +48,18 @@ class _MainDashboardState extends State<MainDashboard> {
               );
             },
           ),
-          CategoryCard(
-            title: "Mileage",
-            svgSrc: "assets/mileage.gif",
-            press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return const MileagePara();
-                }),
-              );
-            },
-          ),
+          // CategoryCard(
+          //   title: "Mileage",
+          //   svgSrc: "assets/mileage.gif",
+          //   press: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) {
+          //         return const MileagePara();
+          //       }),
+          //     );
+          //   },
+          // ),
           CategoryCard(
             title: "Fuel Level",
             svgSrc: "assets/gas.gif",

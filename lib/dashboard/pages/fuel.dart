@@ -27,11 +27,19 @@ class _FuelLvlParaState extends State<FuelLvlPara> {
   NetworkHelper _networkHelper = NetworkHelper();
 // Redraw the series with updating or creating new points by using this controller.
 ChartSeriesController? _chartSeriesController;
+late ZoomPanBehavior _zoomPanBehavior;
 // Count of type integer which binds as x value for the series
 int count = 19;
-  late TooltipBehavior _tooltipBehavior;
+  //late TooltipBehavior _tooltipBehavior;
   @override
   void initState() {
+            _zoomPanBehavior = ZoomPanBehavior(
+      // Enables pinch zooming
+      enablePinching: true, zoomMode: ZoomMode.x, enablePanning: true,
+      enableDoubleTapZooming: true,
+      enableSelectionZooming: true,
+      enableMouseWheelZooming: true, maximumZoomLevel: 0.3,
+    );
     super.initState();
     Timer.periodic(const Duration(seconds: 3),(timer){
       fetchData();
@@ -63,7 +71,7 @@ int count = 19;
   @override
   Widget build(BuildContext context) {
     timer = Timer.periodic(const Duration(milliseconds: 1000), _updateDataSource);
-    _tooltipBehavior = TooltipBehavior(enable: true);
+   // _tooltipBehavior = TooltipBehavior(enable: true);
     // _getChartData();
 
     // timer = Timer.periodic(const Duration(milliseconds: 5000), (_timer) {
@@ -98,17 +106,25 @@ int count = 19;
       body: Center(
         child: circular?CircularProgressIndicator(): SfCartesianChart(
                 // Chart title
+                 zoomPanBehavior: _zoomPanBehavior,
                 title: ChartTitle(text: 'Fuel Lvl Analysis'),
                 // Enable legend
-                legend: Legend(isVisible: true),
+                legend: Legend(
+                  isVisible: true,
+                  toggleSeriesVisibility: true,
+                  // Border color and border width of legend
+                ),
                 // Enable tooltip
-                tooltipBehavior: _tooltipBehavior,
+               // tooltipBehavior: _tooltipBehavior,
                 series: <LineSeries<Welcome, String>>[
                   LineSeries<Welcome, String>(
                       dataSource: welcome1,
                       xValueMapper: (Welcome WelCome, _) => WelCome.time,
                       yValueMapper: (Welcome WelCome, _) => WelCome.fuel,
                       // Enable data label
+                      name: 'FuLvL',
+                    enableTooltip: true,
+                    markerSettings: MarkerSettings(isVisible: true),
                       dataLabelSettings: DataLabelSettings(isVisible: true))
                 ],
                 primaryXAxis: CategoryAxis(
@@ -119,6 +135,20 @@ int count = 19;
                     interval: 3,
                     title: AxisTitle(text: 'Time')),
                 primaryYAxis: CategoryAxis(
+                  plotBands: <PlotBand>[
+                  PlotBand(
+                      verticalTextPadding: '-8%',
+                      horizontalTextPadding: '-1%',opacity: 0.7,
+                      text: 'Low!!!',
+                      textAngle: 0,
+                      start: 0,
+                      end: 20,
+                      color: Colors.white.withOpacity(1),
+                      textStyle:
+                          TextStyle(color: Colors.deepOrange, fontSize: 16),
+                      borderColor: Colors.red,
+                      borderWidth: 2)
+                ],
                   axisLine: const AxisLine(width: 0),
                   majorTickLines: const MajorTickLines(size: 0),
                   title: AxisTitle(text: 'Fuel Lvl (%)'),

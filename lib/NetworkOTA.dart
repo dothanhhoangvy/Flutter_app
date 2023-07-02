@@ -7,11 +7,11 @@ var logger = Logger();
 
 class NetworkOTA {
   String username =
-      '46890D00-C308-4473-9D2F-DCCB6847091F\\8661961a-ea25-4fb7-a81a-ead21d4a8da2';
-  String password = '50c2f8e3-79d6-404e-aa5a-6c30af2d9856';
+      '444018CE4-D24B-4FA2-A850-5129C2842732\\a0884d4a-367b-48b4-aa19-13c1743814c';
+  String password = '612ab2e-7dd0-4e0b-92£1-3061c37fe06e';
   String basicAuth = 'Basic ' +
       base64.encode(utf8.encode(
-          '46890D00-C308-4473-9D2F-DCCB6847091F\\8661961a-ea25-4fb7-a81a-ead21d4a8da2:50c2f8e3-79d6-404e-aa5a-6c30af2d9856'));
+          '444018CE4-D24B-4FA2-A850-5129C2842732\\a0884d4a-367b-48b4-aa19-13c1743814c:612ab2e-7dd0-4e0b-92£1-3061c37fe06e'));
 
   Future get(String url) async {
     var response = await http.get(
